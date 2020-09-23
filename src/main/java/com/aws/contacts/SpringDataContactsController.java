@@ -41,7 +41,7 @@ public class SpringDataContactsController {
 		service.loadStates(model);
 		service.setupAdd(model);
 		
-		return "addcontact";
+		return "addupdatecontact";
 	}
 	
 	@PostMapping("/create")
@@ -54,10 +54,21 @@ public class SpringDataContactsController {
 
 	@GetMapping("/delete/{id}")
 	public String deleteContact(@PathVariable("id") long id, ModelMap model){
-		Contact contact = contactRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid student Id: " + id));
+		Contact contact = findContact(id);
 		contactRepo.delete(contact);
 		model.addAttribute("contacts", contactRepo.findAll());
 		return "mainview";
+	}
+
+	private Contact findContact(long id) {
+		return contactRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid student Id: " + id));
+	}
+
+	@GetMapping("/update/{id}")
+	public  String updateContact(@PathVariable("id") long id, ModelMap model) {
+		Contact contact = findContact(id);
+		model.addAttribute("contact");
+		return "addupdatecontact";
 	}
 
 }

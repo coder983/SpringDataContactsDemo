@@ -31,7 +31,7 @@
 			<td th:text="${contact.zipcode}">00000-0000</td>
 			<td th:text="${contact.email}">andrew@aws.com</td>
 			<td th:text="${contact.phone}">000-000-0000</td>
-			<td><a th:href="@{/edit/{id} (id=${contact.contactid})}">EDIT</a></td>
+			<td><a th:href="@{/update/{id} (id=${contact.contactid})}">EDIT</a></td>
 			<td><a th:href="@{/delete/{id} (id=${contact.contactid})}">DELETE</a></td>
 		</tr>
 	</table>
